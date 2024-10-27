@@ -1,15 +1,16 @@
-from flask import Flask, render_template, url_for
+from app import create_app, db
+from app.Model.models import Course
 
-app = Flask(__name__)
+app = create_app()
 
-lessons = [
-    {"title": "Lesson 1: Something", "video_filename": "lesson1.mov"},
-    {"title": "Lesson 2: Another Thing", "video_filename": "lesson2.mov"}
-]
+@app.shell_context_processor
+def make_shell_context():
+    return {'db': app.db, 'Course': Course, 'User': User}
 
-@app.route('/')
-def index():
-    return render_template('temp.html', lessons=lessons)
+@app.before_request
+def initDB(*args, **kwargs):
+    if app.got_first_request:
+        db.create_all()
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     app.run(debug=True)

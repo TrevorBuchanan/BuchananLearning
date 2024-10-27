@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h1>Courses</h1>
+
+    {% if courses %}
+        {% for course in courses %}
+            <div class="course">
+                <h2>{{ course.title }}</h2>
+                <p>{{ course.description }}</p>  {# Example additional information #}
+                <a href="{{ url_for('routes.course_lessons', course_title=course.title) }}" class="button">View Lessons</a>
+            </div>
+        {% endfor %}
+    {% else %}
+        <p>No courses available.</p>
+    {% endif %}
+
+{% endblock %}

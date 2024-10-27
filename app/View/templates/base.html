@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Buchanan Learner - Online Learning Platform">
+    
+    <title>{{ title }} - Buchanan Learner</title>
+    
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+    
+    {% block extra_css %}
+    <!-- Additional CSS can be included by child templates -->
+    {% endblock %}
+</head>
+
+<body>
+    <nav class="nav-container">
+        <h1><a href="{{ url_for('routes.courses') }}">Buchanan Learning Courses</a></h1>
+    </nav>
+    
+    <main>
+        {% block content %}
+        <!-- Page-specific content will go here -->
+        {% endblock %}
+    </main>
+
+    {% block extra_js %}
+    <!-- Additional JavaScript can be included by child templates -->
+    {% endblock %}
+</body>
+
+</html>
