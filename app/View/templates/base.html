@@ -1,28 +1,18 @@
 {% extends 'bootstrap/base.html' %}
 {% import 'bootstrap/wtf.html' as wtf %}
 
-{% block title %}
-{% if title %}
-{{ title }}
-{% else %}
-Buchanan Learning
-{% endif %}
-{% endblock %}
-
 {% block scripts %}
 {{ moment.include_moment() }}
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
 <script>
     document.addEventListener("DOMContentLoaded", function () {
-        // Find all flash message containers
         const flashMessages = document.querySelectorAll(".flash-container");
-
         flashMessages.forEach((flash) => {
-            // Wait 3 seconds, then add the fade-out class
             setTimeout(() => {
                 flash.classList.add("fade-out");
-            }, 3000); // 3000ms = 3 seconds
-
-            // Remove the element entirely after the fade-out transition ends
+            }, 3000);
             flash.addEventListener("transitionend", () => {
                 flash.remove();
             });
@@ -53,17 +43,17 @@ Buchanan Learning
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav">
                 {% if current_user.is_authenticated %}
-                    {% if current_user.user_type == 'Admin' %}
-                        <li><a href="{{ url_for('routes.admin_profile') }}"> Profile </a></li>
-                        <li><a href="{{ url_for('routes.admin_courses') }}"> Courses </a></li>
-                    {% elif current_user.user_type == 'Educator' %}
-                        <li><a href="{{ url_for('routes.educator_profile') }}"> Profile </a></li>
-                        <li><a href="{{ url_for('routes.educator_courses') }}"> Courses </a></li>
-                        <li><a href="{{ url_for('routes.create_course')}}"> Create Course</a></li>
-                    {% elif current_user.user_type == 'Student' %}
-                        <li><a href="{{ url_for('routes.student_profile') }}"> Profile </a></li>
-                        <li><a href="{{ url_for('routes.student_courses') }}"> Courses </a></li>
-                    {% endif %}
+                {% if current_user.user_type == 'Admin' %}
+                <li><a href="{{ url_for('routes.admin_profile') }}"> Profile </a></li>
+                <li><a href="{{ url_for('routes.admin_courses') }}"> Courses </a></li>
+                {% elif current_user.user_type == 'Educator' %}
+                <li><a href="{{ url_for('routes.educator_profile') }}"> Profile </a></li>
+                <li><a href="{{ url_for('routes.educator_courses') }}"> Courses </a></li>
+                <li><a href="{{ url_for('routes.create_course')}}"> Create Course</a></li>
+                {% elif current_user.user_type == 'Student' %}
+                <li><a href="{{ url_for('routes.student_profile') }}"> Profile </a></li>
+                <li><a href="{{ url_for('routes.student_courses') }}"> Courses </a></li>
+                {% endif %}
                 {% endif %}
             </ul>
             <ul class="nav navbar-nav navbar-right">
@@ -89,7 +79,14 @@ Buchanan Learning
     {% endif %}
     {% endwith %}
 
-    {# application content needs to be provided in the app_content block #}
+    <div class="background-section">
+        {% if title %}
+        <h1 class="title">{{ title }}</h1>
+        {% else %}
+        <h1 class="title">Buchanan Learning</h1>
+        {% endif %}
+    </div>
+
     {% block app_content %}{% endblock %}
 </div>
 {% endblock %}

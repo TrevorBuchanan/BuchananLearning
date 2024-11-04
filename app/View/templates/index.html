@@ -3,17 +3,30 @@
 {% block app_content %}
 <h2>Welcome to Buchanan Learning</h2>
 
-<h3> Please register an account:</h3>
+<h3>Please register as one of the following:</h3>
+<div class="registerLinksContainer">
+    <a href="{{ url_for('auth.student_register')}}">
+        <div class="registerLink">
+            <h2>Student</h2>
+            <p>Best for students who need to stick to a strict learning schedule. </p>
+        </div>
+    </a>
+    
 
-<a href="{{ url_for('auth.student_register')}}" class="registerLink">Student - Best for students who need to stick to a
-    strict
-    learning schedule. Students can be supervised by admins. </a>
-<a href="{{ url_for('auth.admin_register')}}" class="registerLink">Admin - Best for parents or teachers who need to
-    supervise
-    students.</a>
-<a href="{{ url_for('auth.educator_register')}}" class="registerLink">Educator - Best for those who create learning
-    content. </a>
+    <a href="{{ url_for('auth.admin_register')}}">
+        <div class="registerLink">
+            <h2>Admin</h2>
+            <p> Best for parents or teachers who need to supervise students. </p>
+        </div>
+    </a>
 
+    <a href="{{ url_for('auth.educator_register')}}">
+        <div class="registerLink">
+            <h2>Educator</h2>
+            <p>Best for those who create learning content. </p>
+        </div>
+    </a>
+</div>
 
 <h3>Educators</h3>
 <table class="table">

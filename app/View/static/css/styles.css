@@ -1,4 +1,3 @@
-
 .flash-container {
     position: fixed;
     width: 80%;
@@ -9,18 +8,86 @@
     border: 1px solid rgba(16, 125, 162, 0.318);
     border-radius: 5px;
     opacity: 1;
-    transition: opacity 0.5s ease-out; /* Adjust duration for fade-out effect */
+    transition: opacity 0.5s ease-out;
+    /* Adjust duration for fade-out effect */
 }
 
 .flash-container.fade-out {
     opacity: 0;
 }
 
+.registerLinksContainer {
+    display: flex;
+    justify-content: space-evenly;
+    gap: 1rem;
+    padding: 1rem;
+    flex-wrap: nowrap;
+}
+
 .registerLink {
-    background-color: rgb(216, 216, 216);
-    border: 1px solid rgb(200, 200, 200);
-    padding: 3rem;
-    display: inline-block;
+    flex: 1 1 20%;
+    max-width: 300px;
+    margin: 0.5rem;
+    background-color: rgb(246, 246, 246);
+    text-align: center;
     border-radius: 10px;
+    border: 2px solid rgb(217, 217, 217);
     text-decoration: none;
+    padding: 1rem;
+    transition: background-color 0.3s, border-color 0.3s;
+}
+
+.registerLink h2,
+.registerLink p {
+    margin: 0.5rem 0;
+}
+
+.registerLink:hover {
+    background-color: rgb(230, 230, 230);
+    border-color: rgb(180, 180, 180);
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+a:hover {
+    text-decoration: none;
+}
+
+/* Responsive: stack vertically on narrow screens */
+@media (max-width: 600px) {
+    .registerLinksContainer {
+        flex-direction: column;
+        /* Stack items vertically */
+        align-items: center;
+        /* Center-align for a clean look */
+    }
+
+    .registerLink {
+        flex: none;
+        /* Remove flexible sizing */
+        width: 100%;
+        /* Full width of container */
+        max-width: 90%;
+        /* Optionally limit max width on very narrow screens */
+    }
+}
+
+.background-section {
+    background-image: url('../images/TEMPbackground.jpg');
+    background-size: cover; /* Ensures the image covers the entire area */
+    background-position: center; /* Center the background image */
+    background-repeat: no-repeat; /* Prevents the image from repeating */
+    height: 400px; /* Adjust height as needed */
+    width: 100%; /* Full width of the container */
+    position: relative; /* Allows absolute positioning of inner elements if needed */
+}
+
+.background-section .title {
+    color: white; /* Text color */
+    font-size: 10rem; /* Size of the title */
+    text-align: center; /* Center the text */
+    padding-top: 120px; /* Space from the top, adjust as necessary */
 }
