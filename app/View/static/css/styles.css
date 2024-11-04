@@ -15,3 +15,12 @@
 .flash-container.fade-out {
     opacity: 0;
 }
+
+.registerLink {
+    background-color: rgb(216, 216, 216);
+    border: 1px solid rgb(200, 200, 200);
+    padding: 3rem;
+    display: inline-block;
+    border-radius: 10px;
+    text-decoration: none;
+}

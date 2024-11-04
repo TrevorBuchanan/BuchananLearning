@@ -4,7 +4,7 @@
     <h1>Register as an Educator</h1>
     {% if form %}
         <div class="row">
-            <div class="col-md-4">
+            <div class="col-md-12">
                 {{ wtf.quick_form(form, action= url_for('auth.educator_register')) }}
             </div>
         </div>

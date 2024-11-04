@@ -49,7 +49,8 @@ def educator_register():
         return redirect(url_for('routes.index'))
     rform = EducatorRegistrationForm()
     if rform.validate_on_submit():
-        educator = Educator(username=rform.username.data, email=rform.email.data)
+        educator = Educator(first_name=rform.first_name.data, last_name=rform.last_name.data,
+                            username=rform.username.data, email=rform.email.data, bio=rform.bio.data)
         educator.set_password(rform.password.data)
         db.session.add(educator)
         db.session.commit()

@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+
+{% block app_content %}
+
+    <h1>Create a Course</h1>
+
+    {% if cform %}
+        <div class="row">
+            <div class="col-md-12">
+                {{ wtf.quick_form(cform, action= url_for('routes.create_course')) }}
+            </div>
+        </div>
+    {% endif %}
+
+{% endblock %}

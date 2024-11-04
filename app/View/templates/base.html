@@ -59,6 +59,7 @@ Buchanan Learning
                     {% elif current_user.user_type == 'Educator' %}
                         <li><a href="{{ url_for('routes.educator_profile') }}"> Profile </a></li>
                         <li><a href="{{ url_for('routes.educator_courses') }}"> Courses </a></li>
+                        <li><a href="{{ url_for('routes.create_course')}}"> Create Course</a></li>
                     {% elif current_user.user_type == 'Student' %}
                         <li><a href="{{ url_for('routes.student_profile') }}"> Profile </a></li>
                         <li><a href="{{ url_for('routes.student_courses') }}"> Courses </a></li>

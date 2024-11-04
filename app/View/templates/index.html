@@ -1,38 +1,68 @@
 {% extends "base.html" %}
 
 {% block app_content %}
-    <h2>Welcome to Buchanan Learning</h2>
+<h2>Welcome to Buchanan Learning</h2>
 
-    <h3> Please register an account:</h3>
-    <lu>
-        <li> <a href="{{ url_for('auth.student_register')}}">Student</a> - Best for students who need to stick to a strict learning schedule. Students can be supervised by admins. </li>
-        <li> <a href="{{ url_for('auth.admin_register')}}">Admin</a> - Best for parents or teachers who need to supervise students. </li>
-        <li> <a href="{{ url_for('auth.educator_register')}}">Educator</a> - Best for those who create learning content. </li>
-    </lu>
+<h3> Please register an account:</h3>
 
-    <h3>Educators</h3>
-    {% if educators %}
+<a href="{{ url_for('auth.student_register')}}" class="registerLink">Student - Best for students who need to stick to a
+    strict
+    learning schedule. Students can be supervised by admins. </a>
+<a href="{{ url_for('auth.admin_register')}}" class="registerLink">Admin - Best for parents or teachers who need to
+    supervise
+    students.</a>
+<a href="{{ url_for('auth.educator_register')}}" class="registerLink">Educator - Best for those who create learning
+    content. </a>
+
+
+<h3>Educators</h3>
+<table class="table">
+    <thead>
+        <tr>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Bio</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% if educators %}
         {% for educator in educators %}
-            <div class="educator">
-                <h2>{{ educator.first_name }} {{ educator.last_name }}</h2>
-                <p>{{ educator.bio }}</p> 
-            </div>
+        <tr>
+            <td>{{ educator.first_name }}</td>
+            <td>{{ educator.last_name }}</td>
+            <td>{{ educator.bio }}</td>
+        </tr>
         {% endfor %}
-    {% else %}
-        <div class="educator">No educators available.</div>
-    {% endif %}
+        {% else %}
+        <tr>
+            <td colspan="3">No educators available.</td>
+        </tr>
+        {% endif %}
+    </tbody>
+</table>
 
-    <h3>Courses</h3>
-    {% if courses %}
+<h3>Courses</h3>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Title</th>
+            <th>Description</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% if courses %}
         {% for course in courses %}
-            <div class="course">
-                <h2>{{ course.title }}</h2>
-                <p>{{ course.description }}</p>  {# Example additional information #}
-                <a href="{{ url_for('routes.course_lessons', course_title=course.title) }}" class="button">View Lessons</a>
-            </div>
+        <tr>
+            <td>{{ course.title }}</td>
+            <td>{{ course.description }}</td>
+        </tr>
         {% endfor %}
-    {% else %}
-        <div class="educator">No courses available.</div>
-    {% endif %}
+        {% else %}
+        <tr>
+            <td colspan="2">No courses available.</td>
+        </tr>
+        {% endif %}
+    </tbody>
+</table>
 
 {% endblock %}
