@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+
+{% block app_content %}
+<h1>Lessons</h1>
+
+{% for lesson in lessons %}
+    <div class="lesson">
+        <h2>{{ lesson.title }}</h2>
+    </div>
+{% endfor %}
+
+{% endblock %}

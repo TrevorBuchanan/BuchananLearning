@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+
+{% block app_content %}
+    <h2>Welcome to Buchanan Learning</h2>
+
+    <h3> Please register an account:</h3>
+    <lu>
+        <li> <a href="{{ url_for('auth.student_register')}}">Student</a> - Best for students who need to stick to a strict learning schedule. Students can be supervised by admins. </li>
+        <li> <a href="{{ url_for('auth.admin_register')}}">Admin</a> - Best for parents or teachers who need to supervise students. </li>
+        <li> <a href="{{ url_for('auth.educator_register')}}">Educator</a> - Best for those who create learning content. </li>
+    </lu>
+
+    <h3>Educators</h3>
+    {% if educators %}
+        {% for educator in educators %}
+            <div class="educator">
+                <h2>{{ educator.first_name }} {{ educator.last_name }}</h2>
+                <p>{{ educator.bio }}</p> 
+            </div>
+        {% endfor %}
+    {% else %}
+        <div class="educator">No educators available.</div>
+    {% endif %}
+
+    <h3>Courses</h3>
+    {% if courses %}
+        {% for course in courses %}
+            <div class="course">
+                <h2>{{ course.title }}</h2>
+                <p>{{ course.description }}</p>  {# Example additional information #}
+                <a href="{{ url_for('routes.course_lessons', course_title=course.title) }}" class="button">View Lessons</a>
+            </div>
+        {% endfor %}
+    {% else %}
+        <div class="educator">No courses available.</div>
+    {% endif %}
+
+{% endblock %}

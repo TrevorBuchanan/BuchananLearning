@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+
+{% block app_content %}
+    <h1>Register as an Educator</h1>
+    {% if form %}
+        <div class="row">
+            <div class="col-md-4">
+                {{ wtf.quick_form(form, action= url_for('auth.educator_register')) }}
+            </div>
+        </div>
+    {% endif %}
+{% endblock %}

@@ -1,34 +1,94 @@
-<!DOCTYPE html>
-<html lang="en">
+{% extends 'bootstrap/base.html' %}
+{% import 'bootstrap/wtf.html' as wtf %}
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Buchanan Learner - Online Learning Platform">
-    
-    <title>{{ title }} - Buchanan Learner</title>
-    
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
-    
-    {% block extra_css %}
-    <!-- Additional CSS can be included by child templates -->
-    {% endblock %}
-</head>
+{% block title %}
+{% if title %}
+{{ title }}
+{% else %}
+Buchanan Learning
+{% endif %}
+{% endblock %}
 
-<body>
-    <nav class="nav-container">
-        <h1><a href="{{ url_for('routes.courses') }}">Buchanan Learning Courses</a></h1>
-    </nav>
-    
-    <main>
-        {% block content %}
-        <!-- Page-specific content will go here -->
-        {% endblock %}
-    </main>
+{% block scripts %}
+{{ moment.include_moment() }}
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        // Find all flash message containers
+        const flashMessages = document.querySelectorAll(".flash-container");
 
-    {% block extra_js %}
-    <!-- Additional JavaScript can be included by child templates -->
-    {% endblock %}
-</body>
+        flashMessages.forEach((flash) => {
+            // Wait 3 seconds, then add the fade-out class
+            setTimeout(() => {
+                flash.classList.add("fade-out");
+            }, 3000); // 3000ms = 3 seconds
 
-</html>
+            // Remove the element entirely after the fade-out transition ends
+            flash.addEventListener("transitionend", () => {
+                flash.remove();
+            });
+        });
+    });
+</script>
+{% endblock %}
+
+
+{% block styles %}
+{{super()}}
+<link rel="stylesheet" type="text/css" href="{{url_for('static', filename='css/styles.css')}}">
+{% endblock %}
+
+{% block navbar %}
+<nav class="navbar navbar-default">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+                data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="{{ url_for('routes.index') }}"> Buchanan Learning </a>
+        </div>
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav">
+                {% if current_user.is_authenticated %}
+                    {% if current_user.user_type == 'Admin' %}
+                        <li><a href="{{ url_for('routes.admin_profile') }}"> Profile </a></li>
+                        <li><a href="{{ url_for('routes.admin_courses') }}"> Courses </a></li>
+                    {% elif current_user.user_type == 'Educator' %}
+                        <li><a href="{{ url_for('routes.educator_profile') }}"> Profile </a></li>
+                        <li><a href="{{ url_for('routes.educator_courses') }}"> Courses </a></li>
+                    {% elif current_user.user_type == 'Student' %}
+                        <li><a href="{{ url_for('routes.student_profile') }}"> Profile </a></li>
+                        <li><a href="{{ url_for('routes.student_courses') }}"> Courses </a></li>
+                    {% endif %}
+                {% endif %}
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                {% if current_user.is_anonymous %}
+                <li><a href="{{ url_for('auth.login') }}"> Login </a></li>
+                {% else %}
+                <li><a href="{{ url_for('auth.logout') }}"> Logout </a></li>
+                {% endif %}
+            </ul>
+        </div>
+    </div>
+</nav>
+{% endblock %}
+
+{% block content %}
+
+<div class="container">
+    {% with messages = get_flashed_messages() %}
+    {% if messages %}
+    {% for message in messages %}
+    <div class="flash-container" role="alert">{{ message }}</div>
+    {% endfor %}
+    {% endif %}
+    {% endwith %}
+
+    {# application content needs to be provided in the app_content block #}
+    {% block app_content %}{% endblock %}
+</div>
+{% endblock %}
