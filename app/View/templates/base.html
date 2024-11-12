@@ -58,9 +58,9 @@
             </ul>
             <ul class="nav navbar-nav navbar-right">
                 {% if current_user.is_anonymous %}
-                <li><a href="{{ url_for('auth.login') }}"> Login </a></li>
+                <li><a href="{{ url_for('auth.sign_in') }}"> Sign in</a></li>
                 {% else %}
-                <li><a href="{{ url_for('auth.logout') }}"> Logout </a></li>
+                <li><a href="{{ url_for('auth.sign_out') }}"> Sign out </a></li>
                 {% endif %}
             </ul>
         </div>
@@ -78,15 +78,7 @@
     {% endfor %}
     {% endif %}
     {% endwith %}
-
-    <div class="background-section">
-        {% if title %}
-        <h1 class="title">{{ title }}</h1>
-        {% else %}
-        <h1 class="title">Buchanan Learning</h1>
-        {% endif %}
-    </div>
-
+    
     {% block app_content %}{% endblock %}
 </div>
 {% endblock %}

@@ -1,11 +1,11 @@
 {% extends "base.html" %}
 
 {% block app_content %}
-    <h1>Log In</h1>
+    <h1>Sign In</h1>
     {% if form %}
         <div class="row">
             <div class="col-md-4">
-                {{ wtf.quick_form(form, action= url_for('auth.login')) }}
+                {{ wtf.quick_form(form, action= url_for('auth.sign_in')) }}
             </div>
         </div>
     {% endif %}

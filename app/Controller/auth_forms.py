@@ -59,7 +59,7 @@ class EducatorRegistrationForm(FlaskForm):
         if member is not None:
             raise ValidationError('The email already exists! Please use a different email address')
 
-class LoginForm(FlaskForm):
+class SignInForm(FlaskForm):
     username = StringField('Username', validators=[DataRequired()])
     password = PasswordField('Password', validators=[DataRequired()])
     remember_me = BooleanField('Remember Me')

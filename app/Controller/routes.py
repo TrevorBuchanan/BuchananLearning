@@ -36,9 +36,8 @@ def admin_courses():
 @login_required
 @role_required('Educator')
 def educator_courses():
-    courses = []
-    educators = []
-    return render_template('educator_courses.html', title="Courses", courses=courses, educators=educators)
+    courses = Course.query.filter_by(member_id=current_user.id).all()
+    return render_template('educator_courses.html', title="Courses", courses=courses)
 
 @bp_routes.route('/lessons/<course_title>', methods=['GET'])
 @login_required
@@ -78,9 +77,13 @@ def create_course():
         title = cform.title.data
         description = cform.description.data
         if title:
-            newCourse = Course(title=title, description=description)
-            db.session.add(newCourse)
+            new_course = Course(
+                title=title,
+                description=description,
+                member_id=current_user.id 
+            )
+            db.session.add(new_course)
             db.session.commit()
             flash("Course " + title + " created.")
-            return redirect(url_for('routes.index'))
+            return redirect(url_for('routes.educator_courses'))
     return render_template('create_course.html', cform=cform)
